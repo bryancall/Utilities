@@ -4,8 +4,6 @@ use strict;
 use warnings;
 use Data::Dumper;
 
-my $myIp='10.72.164.101';
-
 #-----------------------------------------------------------------------------
 sub maxValue($$$) {
   my($data, $name, $value) = @_;
@@ -36,7 +34,7 @@ sub maxValue($$$) {
 
   while(<TSHARK>) {
    #print;
-    if (m|^\s*\d+\s+($myIp \d+)\s+.*\[SYN\].+Win=(\d+).+MSS=(\d+)|) {
+    if (m|^\s*\d+\s+(\S+\s+\d+)\s+.*\[SYN\].+Win=(\d+).+MSS=(\d+)|) {
       $client = $1;
       $data{$1}->{type} = 'client';
       maxValue($data{$1}, 'win', $2);
